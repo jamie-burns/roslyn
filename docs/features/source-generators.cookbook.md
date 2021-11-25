@@ -230,7 +230,7 @@ public class MyXmlGenerator : ISourceGenerator
 
     private static readonly DiagnosticDescriptor InvalidXmlWarning = new DiagnosticDescriptor(id: "MYXMLGEN001",
                                                                                               title: "Couldn't parse XML file",
-                                                                                              messageFormat: "Couldn't parse XML file '{0}'.",
+                                                                                              messageFormat: "Couldn't parse XML file '{0}'",
                                                                                               category: "MyXmlGenerator",
                                                                                               DiagnosticSeverity.Warning,
                                                                                               isEnabledByDefault: true);
@@ -638,9 +638,12 @@ The recommended approach is to use [Microsoft.CodeAnalysis.Testing](https://gith
 This works in the same way as analyzers and codefix testing. You add a class like the following:
 
 ```csharp
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
+using System;
+using System.Collections.Immutable;
 
 public static class CSharpSourceGeneratorVerifier<TSourceGenerator>
     where TSourceGenerator : ISourceGenerator, new()
